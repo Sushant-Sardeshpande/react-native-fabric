@@ -21,22 +21,23 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:2.3.+'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 27)
-    buildToolsVersion safeExtGet('buildToolsVersion', '27.0.3')
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 16)
-        targetSdkVersion safeExtGet('targetSdkVersion', 26)
+        minSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
-        versionName '1.0'
+        versionName "1.0"
     }
+  
     lintOptions {
         abortOnError false
     }
@@ -49,15 +50,14 @@ repositories {
 repositories {
     maven { url 'https://maven.fabric.io/public' }
     maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url "$rootDir/../node_modules/react-native/android"
     }
     google()
 }
 
-dependencies {
-    implementation "com.facebook.react:react-native:${safeExtGet('reactNative', '+')}"
-    implementation("com.crashlytics.sdk.android:crashlytics:2.9.5@aar") {
+dependencies {  
+    compile project(':ReactAndroid')
+    compile("com.crashlytics.sdk.android:crashlytics:2.9.5@aar") {
         transitive = true;
     }
 }
